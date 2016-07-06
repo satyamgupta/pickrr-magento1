@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <tabs>
+        <pickrr translate="label" module="pickrr_magento1">
+            <label>Pickrr Extensions</label>
+            <sort_order>100</sort_order>
+        </pickrr>
+    </tabs>
+    <sections>
+        <pickrr_magento1 translate="label" module="pickrr_magento1">
+            <label>Pickrr Magento1</label>
+            <tab>pickrr</tab>
+            <sort_order>1000</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+ 
+            <groups>
+                <general translate="label" module="pickrr_magento1">
+                    <label>General Options</label>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+ 
+                    <fields>
+                        <automatic_shipment_enable translate="label">
+                            <sort_order>1</sort_order>
+                            <frontend_type>select</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <label>Automatic Shipment Enable</label>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>
+                                If this option is enabled, whenever a new order is created, it's shipment will automatically be created using Pickrr.
+                            </comment>
+                        </automatic_shipment_enable>
+
+                        <auth_token translate="label">
+                            <sort_order>2</sort_order>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <label>Auth Token</label>
+                            <comment>
+                                Enter Auth Token provided to you by Pickrr.
+                            </comment>
+                            <validate>required-entry</validate>
+                        </auth_token>
+                    </fields>
+                </general>
+
+                <shipment_details translate="label" module="pickrr_magento1">
+                    <label>Shipment Details</label>
+                    <sort_order>2</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+
+                    <fields>
+                        <pickup_time translate="label">
+                            <sort_order>1</sort_order>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <label>Pickup Time</label>
+                            <comment>
+                                Pickup Time, Format: "YYYY-MM-DD HH:MM"
+                            </comment>
+                        </pickup_time>
+
+                        <from_name translate="label">
+                            <sort_order>2</sort_order>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <label>Name</label>
+                            <comment>
+                                Sender's name on shipment, generally store's name
+                            </comment>
+                            <validate>required-entry</validate>
+                        </from_name>
+
+                        <from_phone_number translate="label">
+                            <sort_order>3</sort_order>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <label>Phone Number</label>
+                            <comment>
+                                Sender's phone number on shipment
+                            </comment>
+                            <validate>required-entry</validate>
+                        </from_phone_number>
+
+                        <from_pincode translate="label">
+                            <sort_order>4</sort_order>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <label>Pincode</label>
+                            <comment>
+                                Sender's pincode on shipment
+                            </comment>
+                            <validate>required-entry</validate>
+                        </from_pincode>
+
+                        <from_address translate="label">
+                            <sort_order>5</sort_order>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <label>Address</label>
+                            <comment>
+                                Sender's address on shipment
+                            </comment>
+                            <validate>required-entry</validate>
+                        </from_address>
+
+                    </fields>
+                </shipment_details>
+            </groups>
+        </pickrr_magento1>
+    </sections>
+</config>

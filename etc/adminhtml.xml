@@ -1,0 +1,22 @@
+<config>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <pickrr_magento1 translate="title" module="pickrr_magento1">
+                                        <title>Pickrr Magento1</title>
+                                        <sort_order>999</sort_order>
+                                    </pickrr_magento1>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>
