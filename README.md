@@ -1,22 +1,14 @@
 ## Pickrr Shipment Extension for Magento
 
-Pickrr Magento 2 module for automatic/manual creation of shipments thorugh Pickrr.
+Pickrr Magento 1 module for automatic/manual creation of shipments thorugh Pickrr.
 
 ###Installation Instructions:
 
-1. Extract the zip file in the the `<root_of_Magento2>/app/code` <br>
- OR <br>
- Goto Magento's root folder and install it using composer from terminal:
- 
+1. Goto Magento's root folder and install it using composer from terminal:
  ```shell
- composer require pickrr/magento2:dev-master
+ composer require pickrr/magento1:dev-master
  ```
-2. Goto root folder of magento in terminal, and run:
- ```shell
- bin/magento module:enable Pickrr_Magento1
- bin/magento setup:upgrade
- 
- ```
+2. Goto Admin panel, logout and then login again.
 3. Verify in Magento Admin Panel whether the module is enabled. To check, go to Admin Panel >System>Configuration>Advanced>Advanced>Pickrr_magento2 <br>
 4. Goto Admin Panel >System>configuration>PickrrExtensions>PickrrMagento1, and enable the automatic shipment option & enter the asked details.
 

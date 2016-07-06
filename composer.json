@@ -1,13 +1,13 @@
 {
 	"name": "pickrr/magento1",
 	"description": "Pickrr Magento1 module for automatic creating/importing of shipment/tracking details in your pickrr account.",
-	"type": "magento-module",
 	"license": [
 		"MIT"
 		],
+	"type": "magento-module",
 	"require": {
 		"php": "~5.5.0|~5.6.0",
-    	"magento-hackathon/magento-composer-installer":"*"
+		"magento-hackathon/magento-composer-installer":"*"
 	},
 	"keywords": [
 		"pickrr", "magento", "shipments",
@@ -28,9 +28,11 @@
 	},
 	"minimum-stability": "alpha",
 	"extra":{
-    "map":[
-      ["Pickrr_Magento1.xml", "app/etc/modules/Pickrr_Magento1.xml"]
-    ]
+		"magento-root-dir": "/var/www/html/magento/",
+	    "map":[
+	      ["Pickrr_Magento1.xml", "app/etc/modules/Pickrr_Magento1.xml"],
+	      ["*","app/code/local/Pickrr/Magento1"]
+	    ]
   }
 
 }
