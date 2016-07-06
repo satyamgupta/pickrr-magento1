@@ -6,7 +6,8 @@
 		"MIT"
 		],
 	"require": {
-		"php": "~5.5.0|~5.6.0"
+		"php": "~5.5.0|~5.6.0",
+    	"magento-hackathon/magento-composer-installer":"*"
 	},
 	"keywords": [
 		"pickrr", "magento", "shipments",
@@ -25,6 +26,11 @@
 		"issues": "https://github.com/satyamgupta/pickrr-magento1/issues",
 		"docs": "https://github.com/satyamgupta/pickrr-magento1/"
 	},
-	"minimum-stability": "alpha"
+	"minimum-stability": "alpha",
+	"extra":{
+    "map":[
+      ["Pickrr_Magento1.xml", "app/etc/modules/Pickrr_Magento1.xml"]
+    ]
+  }
 
 }

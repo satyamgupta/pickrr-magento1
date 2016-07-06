@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Pickrr_Magento1>
+
+            <active>true</active>
+            <codePool>local</codePool>
+
+        </Pickrr_Magento1>
+    </modules>
+</config>
