@@ -8,11 +8,13 @@ Pickrr Magento 1 module for automatic/manual creation of shipments thorugh Pickr
  ```shell
  composer require pickrr/magento1:dev-master
  ```
+  and type your magento's root location when asked,
+  For Ubuntu: /var/www/html/magento
 2. Goto Admin panel, logout and then login again.
 3. Verify in Magento Admin Panel whether the module is enabled. To check, go to Admin Panel >System>Configuration>Advanced>Advanced>Pickrr_magento2 <br>
 4. Goto Admin Panel >System>configuration>PickrrExtensions>PickrrMagento1, and enable the automatic shipment option & enter the asked details.
 
-In case of any problems/queries, contact satyam.gupta2@gmail.com
+In case of any problems/queries, contact info@pickrr.com
 
 ---
 
@@ -23,7 +25,7 @@ In case of any problems/queries, contact satyam.gupta2@gmail.com
 ```php
 //import helper class
 
-Pickrr\Magento2\Helper\ExportShipment $helper;
+$helper = Mage::helper('pickrr_magento1');
 
 ```
 
@@ -33,7 +35,7 @@ Passing $pickup_time and $cod is optional.
 
 **Prototype of the function:**
 ```php
-createShipment($auth_token, $item_name, $from_name, $from_phone_number, $from_pincode, $from_address, $to_name, $to_phone_number, $to_pincode, $to_address, $order_id = 'NULL', $pickup_time='NULL', $cod=0.0);
+createShipment($auth_token, $item_name, $from_name, $from_phone_number, $from_pincode, $from_address, $to_name, $to_phone_number, $to_pincode, $to_address, $pickup_time='NULL', $cod=0.0);
 ```
 
 It returns the tracking_id from Pickrr.
