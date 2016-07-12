@@ -92,13 +92,13 @@ extends Mage_Core_Helper_Abstract
      */
     protected function _saveOrder(Mage_Sales_Model_Order $order)
     {
-        $order->setData('state', Mage_Sales_Model_Order::STATE_COMPLETE);
-        $order->setData('status', Mage_Sales_Model_Order::STATE_COMPLETE);
+        $order->setData('state', Mage_Sales_Model_Order::STATE_PROCESSING);
+        $order->setData('status', Mage_Sales_Model_Order::STATE_PROCESSING);
      
         $order->save();
     }
 
-    public function createShipment($auth_token, $item_name, $from_name, $from_phone_number, $from_pincode, $from_address, $to_name, $to_phone_number, $to_pincode, $to_address, $pickup_time = 'NULL', $cod=0.0)
+    public function createShipment($auth_token, $item_name, $from_name, $from_phone_number, $from_pincode, $from_address, $to_name, $to_phone_number, $to_pincode, $to_address, $cod=0.0, $pickup_time = 'NULL')
     {
         try{
 
@@ -115,7 +115,7 @@ extends Mage_Core_Helper_Abstract
                       'to_address' => $to_address
                     );
 
-            if($cod>0.0) $params['cod'] = $cod;
+            if($cod>0.0) $params['cod_amount'] = $cod;
             if($pickup_time!='NULL') $params['order_time'] = $pickup_time;
 
             $json_params = json_encode( $params );
@@ -153,7 +153,7 @@ extends Mage_Core_Helper_Abstract
 
     }
 
-    public function createOrderShipment($auth_token, $order, $from_name, $from_phone_number, $from_pincode, $from_address, $pickup_time = 'NULL', $cod=0.0)
+    public function createOrderShipment($auth_token, $order, $from_name, $from_phone_number, $from_pincode, $from_address, $cod=0.0, $pickup_time = 'NULL')
     {
         try{
 

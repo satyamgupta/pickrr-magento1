@@ -6,7 +6,7 @@ class Pickrr_Magento1_Model_Observer
     {
         try{
 
-            if ("0" == Mage::getStoreConfig('pickrr_magento1/general/automatic_export_enable'))
+            if ("0" == Mage::getStoreConfig('pickrr_magento1/general/automatic_shipment_enable'))
               return NULL;
 
             $order = $observer->getEvent()->getOrder();
