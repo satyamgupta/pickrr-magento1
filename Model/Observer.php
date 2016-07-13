@@ -10,6 +10,12 @@ class Pickrr_Magento1_Model_Observer
               return NULL;
 
             $order = $observer->getEvent()->getOrder();
+            $payment = $order->getPayment();
+
+            if($payment->getMethod() == "cashondelivery")
+                $cod_amount = $order->getGrandTotal();
+            else
+                $cod_amount = 0.0;
 
             if ($order->getState() == "processing" )
                return NULL;
@@ -24,7 +30,7 @@ class Pickrr_Magento1_Model_Observer
 
             $helper = Mage::helper('pickrr_magento1');
 
-            $helper->createOrderShipment($auth_token, $order, $from_name, $from_phone_number, $from_pincode, $from_address, $pickup_time);
+            $helper->createOrderShipment($auth_token, $order, $from_name, $from_phone_number, $from_pincode, $from_address, $pickup_time, $cod_amount);
         }
         catch (\Exception $e) {
             Mage::throwException($e->getMessage());
