@@ -17,7 +17,7 @@ class Pickrr_Magento1_Model_Observer
             else
                 $cod_amount = 0.0;
 
-            if ($order->getState() == "processing" )
+            if ($order->getState() == "new" || $order->getState() == "pending_payment" )
                return NULL;
 
             $auth_token = Mage::getStoreConfig('pickrr_magento1/general/auth_token');
