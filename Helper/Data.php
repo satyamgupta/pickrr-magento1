@@ -98,26 +98,9 @@ extends Mage_Core_Helper_Abstract
         $order->save();
     }
 
-    public function createShipment($auth_token, $item_name, $from_name, $from_phone_number, $from_pincode, $from_address, $to_name, $to_phone_number, $to_pincode, $to_address, $cod=0.0, $pickup_time = 'NULL')
+    public function createShipment($params)
     {
         try{
-
-          $params = array(
-                      'auth_token' => $auth_token,
-                      'item_name' => $item_name,
-                      'from_name' => $from_name,
-                      'from_phone_number' => $from_phone_number,
-                      'from_pincode'=> $from_pincode,
-                      'from_address'=> $from_address,
-                      'to_name'=> $to_name,
-                      'to_phone_number' => $to_phone_number,
-                      'to_pincode' => $to_pincode,
-                      'to_address' => $to_address
-                    );
-
-            if($cod>0.0) $params['cod_amount'] = $cod;
-            if($pickup_time!='NULL') $params['order_time'] = $pickup_time;
-
             $json_params = json_encode( $params );
 
             $url = 'http://www.pickrr.com/api/place-order/';
@@ -153,25 +136,43 @@ extends Mage_Core_Helper_Abstract
 
     }
 
-    public function createOrderShipment($auth_token, $order, $from_name, $from_phone_number, $from_pincode, $from_address, $cod=0.0, $pickup_time = 'NULL')
+    public function createOrderShipment($order)
     {
         try{
-
             $itemCount = $order->getTotalItemCount();
             $item_name = "NULL";
-
             if($itemCount==1) $item_name = $order->getItemsCollection()->getFirstItem()->getName();
             else $item_name = 'Multiple Items';
-
+            
             $shipping_address = $order->getShippingAddress();
+            $client_order_id = $order->getIncrementId();
+            $invoice_value = $order->getGrandTotal();
+            
+            $params = array(
+                      'auth_token' => Mage::getStoreConfig('pickrr_magento1/general/auth_token'),
+                      'client_order_id' => $client_order_id,
+                      'invoice_value' => $invoice_value,
+                      'item_name' => $item_name,
+                      'from_name' => Mage::getStoreConfig('pickrr_magento1/shipment_details/from_name'),
+                      'from_phone_number' => Mage::getStoreConfig('pickrr_magento1/shipment_details/from_phone_number'),
+                      'from_pincode'=> Mage::getStoreConfig('pickrr_magento1/shipment_details/from_pincode'),
+                      'from_address'=> Mage::getStoreConfig('pickrr_magento1/shipment_details/from_address'),
+                      'to_name'=> $shipping_address->getName(),
+                      'to_phone_number' => $shipping_address->getTelephone(),
+                      'to_pincode' => $shipping_address->getPostcode(),
+                      'to_address' => implode(', ', $shipping_address->getStreet()) . ", " . $shipping_address->getCity() . ", " . $shipping_address->getRegion()
+                    );
+            
+            $payment = $order->getPayment();
+            if($payment->getMethod() == "cashondelivery")
+                $cod_amount = $order->getGrandTotal();
+            else
+                $cod_amount = 0.0;
+            $pickup_time = Mage::getStoreConfig('pickrr_magento1/shipment_details/pickup_time');
+            if($cod>0.0) $params['cod_amount'] = $cod;
+            if($pickup_time!='NULL') $params['order_time'] = $pickup_time;
 
-            $to_name = $shipping_address->getName();
-            $to_phone_number = $shipping_address->getTelephone();
-            $to_pincode = $shipping_address->getPostcode();
-            $to_address = implode(', ', $shipping_address->getStreet()) . ", " . $shipping_address->getCity() . ", " . $shipping_address->getRegion();
-
-            $tracking_no = $this->createShipment($auth_token, $item_name, $from_name, $from_phone_number, $from_pincode, $from_address, $to_name, $to_phone_number, $to_pincode, $to_address, $pickup_time, $cod);
-
+            $tracking_no = $this->createShipment($params);
             $this->completeShipment($order, $tracking_no);
         }
         catch (\Exception $e) {
